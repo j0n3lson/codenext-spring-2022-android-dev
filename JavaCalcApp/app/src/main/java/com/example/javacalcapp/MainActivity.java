@@ -96,13 +96,32 @@ public class MainActivity extends AppCompatActivity {
                 txtCalcArea.setText(currentText + "/");
                 break;
             case R.id.btnMultiply:
+                if (currentText.isEmpty() || lastCharMatches(currentText, '*')) {
+                    break;
+                }
+                txtCalcArea.setText(currentText + "*");
                 break;
             case R.id.btnAdd:
+                if (currentText.isEmpty() || lastCharMatches(currentText, '+')) {
+                    break;
+                }
+                txtCalcArea.setText(currentText + "+");
                 break;
             case R.id.btnSubtract:
+                if (lastCharMatches(currentText, '-')) {
+                    break;
+                }
+                txtCalcArea.setText(currentText + "-");
                 break;
             case R.id.btnEquals:
                 break;
         }
+    }
+
+    private boolean lastCharMatches(String text, char matchChar) {
+        if(text.isEmpty() || matchChar == ' '){
+            return false;
+        }
+        return text.charAt(text.length() - 1) == matchChar;
     }
 }
