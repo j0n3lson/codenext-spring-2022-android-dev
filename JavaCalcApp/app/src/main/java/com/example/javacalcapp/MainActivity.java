@@ -3,6 +3,7 @@ package com.example.javacalcapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param view the {@link View} that was clicked.
      */
+    @SuppressLint("SetTextI18n")
     public void doButtonClick(View view) {
         boolean isButtonView = view instanceof Button;
         if (!isButtonView) {
@@ -57,22 +59,50 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String currentText = this.txtCalcArea.getText().toString();
-
-        // Use the button type to determine the action
         Button viewButton = (Button) view;
+
+        // Digit buttons are all the same
         if (DIGIT_BUTTON_IDS.contains(viewButton.getId())) {
+            // TODO: Avoid divide by zero - Do not allow 0 if the previous char is a "/".
             txtCalcArea.setText(currentText + viewButton.getText().toString());
             return;
         }
 
+        // These are special buttons that need different handling.
         switch (viewButton.getId()) {
-            case R.id.btnDot:
             case R.id.btnClear:
+                txtCalcArea.setText("");
+                break;
             case R.id.btnDelete:
+                // Only clear the last character
+                if (currentText.length() > 0) {
+                    txtCalcArea.setText(currentText.substring(0, currentText.length() - 1));
+                }
+                break;
+            case R.id.btnDot:
+                // Cannot add a dot if there's already a dot in the string.
+                boolean hasDotAlready = currentText.matches(".*\\..*");
+                if (hasDotAlready) {
+                    break;
+                }
+                txtCalcArea.setText(currentText + ".");
+                break;
+            case R.id.btnParens:
+                break;
             case R.id.btnDivide:
+                if(currentText.isEmpty() || currentText.matches(".*/.*")){
+                   break;
+                }
+                txtCalcArea.setText(currentText + "/");
+                break;
             case R.id.btnMultiply:
+                break;
             case R.id.btnAdd:
+                break;
             case R.id.btnSubtract:
+                break;
+            case R.id.btnEquals:
+                break;
         }
     }
 }
