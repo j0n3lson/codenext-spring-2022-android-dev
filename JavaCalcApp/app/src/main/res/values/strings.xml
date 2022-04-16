@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">JavaCalcApp</string>
+    <string name="btnDigit00">0</string>
+    <string name="btnDigit01">1</string>
+    <string name="btnDigit02">2</string>
+    <string name="btnDigit03">3</string>
+    <string name="btnDigit04">4</string>
+    <string name="btnDigit05">5</string>
+    <string name="btnDigit06">6</string>
+    <string name="btnDigit07">7</string>
+    <string name="btnDigit08">8</string>
+    <string name="btnDigit09">9</string>
+    <string name="btnClear">AC</string>
+    <string name="btnDivide">/</string>
+    <string name="btnMultiply">x</string>
+    <string name="btnAdd">+</string>
+    <string name="btnSubtract">-</string>
+    <string name="btnParens">( )</string>
+    <string name="btnModulo">%</string>
+    <string name="btnDot">.</string>
+    <string name="btnEquals">=</string>
+</resources>
