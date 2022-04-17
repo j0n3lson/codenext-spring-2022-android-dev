@@ -63,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Digit buttons are all the same
         if (DIGIT_BUTTON_IDS.contains(viewButton.getId())) {
-            // TODO: Avoid divide by zero - Do not allow 0 if the previous char is a "/".
+            if (viewButton.getId() == R.id.btnDigit00 && lastCharMatches(currentText, '/')) {
+                return;
+            }
             txtCalcArea.setText(currentText + viewButton.getText().toString());
             return;
         }
