@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
      */
     @SuppressLint("SetTextI18n")
     public void doButtonClick(View view) {
+        // TODO: Refactor this into a ButtonHandler class and unit test it. We can use
+        // parameterized testing for this. See https://stackoverflow.com/a/46553713
         boolean isButtonView = view instanceof Button;
         if (!isButtonView) {
             return;
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 txtCalcArea.setText(currentText + ".");
                 break;
             case R.id.btnParens:
+                // TODO: Implement btnParens
                 break;
             case R.id.btnDivide:
                 if (textContains(currentText, '/')) {
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 txtCalcArea.setText(currentText + "-");
                 break;
             case R.id.btnEquals:
-                // TODO: Parse the string using ANTLRv4. This is a good approach because
+                // TODO: Implement btnEquals using ANTLRv4 parsing.This is a good approach because
                 // (1) It supports context free grammars and can support balanced parens check
                 // (2) It's been a long long time since I messed with lexers/parsers
                 // (3) It's possible (likely) that the grammar could replace all this manual
