@@ -1,7 +1,5 @@
 package com.example.javacalcapp;
 
-import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,17 +23,18 @@ public class ButtonHandler {
      *
      * @return The updated text with the new character appended (if allowed).
      */
-    static String process(Button viewButton, String currentText) {
+    static String process(int buttonId, String buttonText, String currentText) {
         // Digit buttons are all the same
-        if (DIGIT_BUTTON_IDS.contains(viewButton.getId())) {
-            if (viewButton.getId() == R.id.btnDigit00 && lastCharMatches(currentText, "/")) {
+        if (DIGIT_BUTTON_IDS.contains(buttonId)) {
+            // IMPORTANT: Don't allow divide by 0.
+            if (buttonId == R.id.btnDigit00 && lastCharMatches(currentText, "/")) {
                 return currentText;
             }
-            return currentText + viewButton.getText().toString();
+            return currentText + buttonText;
         }
 
         // These are special buttons that need different handling.
-        switch (viewButton.getId()) {
+        switch (buttonId) {
             case R.id.btnClear:
                 return "";
             case R.id.btnDelete:

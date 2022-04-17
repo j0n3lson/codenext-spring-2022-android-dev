@@ -45,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Button viewButton = (Button) view;
-        String currentText = txtCalcArea.getText().toString();
-        String updatedText = ButtonHandler.process(viewButton, currentText);
+        String updatedText = ButtonHandler.process(
+                viewButton.getId(),
+                viewButton.getText().toString(),
+                txtCalcArea.getText().toString());
         txtCalcArea.setText(updatedText);
     }
 }
