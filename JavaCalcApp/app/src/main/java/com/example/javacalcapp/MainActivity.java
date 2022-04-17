@@ -1,13 +1,13 @@
 package com.example.javacalcapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnDot:
                 // Cannot add a dot if there's already a dot in the string.
-                if(textContains(currentText, '.')){
+                if (textContains(currentText, '.')) {
                     break;
                 }
                 txtCalcArea.setText(currentText + ".");
@@ -91,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnParens:
                 break;
             case R.id.btnDivide:
-                if (textContains(currentText, '/')){
+                if (textContains(currentText, '/')) {
                     break;
                 }
-            txtCalcArea.setText(currentText + "/");
-            break;
+                txtCalcArea.setText(currentText + "/");
+                break;
             case R.id.btnMultiply:
                 if (lastCharMatches(currentText, '*')) {
                     break;
@@ -115,6 +115,14 @@ public class MainActivity extends AppCompatActivity {
                 txtCalcArea.setText(currentText + "-");
                 break;
             case R.id.btnEquals:
+                // TODO: Parse the string using ANTLRv4. This is a good approach because
+                // (1) It supports context free grammars and can support balanced parens check
+                // (2) It's been a long long time since I messed with lexers/parsers
+                // (3) It's possible (likely) that the grammar could replace all this manual
+                //      code and let us have a more expressive rule set.
+                // See https://stackoverflow.com/a/7597623 for ANTLRv4 on Java
+                // See https://stackoverflow.com/a/9609118 for working example
+                // See https://github.com/antlr/grammars-v4/tree/master/calculator for a grammar.
                 break;
         }
     }
