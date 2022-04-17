@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Digit buttons are all the same
         if (DIGIT_BUTTON_IDS.contains(viewButton.getId())) {
-            if (viewButton.getId() == R.id.btnDigit00 && lastCharMatches(currentText, '/')) {
+            if (viewButton.getId() == R.id.btnDigit00 && lastCharMatches(currentText, "/")) {
                 return;
             }
             txtCalcArea.setText(currentText + viewButton.getText().toString());
@@ -97,19 +97,19 @@ public class MainActivity extends AppCompatActivity {
                 txtCalcArea.setText(currentText + "/");
                 break;
             case R.id.btnMultiply:
-                if (lastCharMatches(currentText, '*')) {
+                if (lastCharMatches(currentText, "\\*")) {
                     break;
                 }
                 txtCalcArea.setText(currentText + "*");
                 break;
             case R.id.btnAdd:
-                if (lastCharMatches(currentText, '+')) {
+                if (lastCharMatches(currentText, "\\+")) {
                     break;
                 }
                 txtCalcArea.setText(currentText + "+");
                 break;
             case R.id.btnSubtract:
-                if (lastCharMatches(currentText, '-')) {
+                if (lastCharMatches(currentText, "\\-")) {
                     break;
                 }
                 txtCalcArea.setText(currentText + "-");
@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     private boolean textContains(String text, char matchChar) {
         if (text.isEmpty() || matchChar == ' ') {
             return false;
@@ -134,10 +135,14 @@ public class MainActivity extends AppCompatActivity {
         return text.contains(Character.toString(matchChar));
     }
 
-    private boolean lastCharMatches(String text, char matchChar) {
-        if (text.isEmpty() || matchChar == ' ') {
-            return false;
+    private char getLastChar(String text) {
+        if (text.isEmpty()) {
+            return ' ';
         }
-        return text.charAt(text.length() - 1) == matchChar;
+        return text.charAt(text.length() - 1);
+    }
+
+    private boolean lastCharMatches(String text, String regex) {
+        return Character.toString(getLastChar(text)).matches(regex);
     }
 }
