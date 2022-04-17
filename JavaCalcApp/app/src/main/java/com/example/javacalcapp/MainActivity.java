@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnDot:
                 // Cannot add a dot if there's already a dot in the string.
-                boolean hasDotAlready = currentText.matches(".*\\..*");
-                if (hasDotAlready) {
+                if(textContains(currentText, '.')){
                     break;
                 }
                 txtCalcArea.setText(currentText + ".");
@@ -90,19 +89,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnParens:
                 break;
             case R.id.btnDivide:
-                if(currentText.isEmpty() || currentText.matches(".*/.*")){
-                   break;
+                if (textContains(currentText, '/')){
+                    break;
                 }
-                txtCalcArea.setText(currentText + "/");
-                break;
+            txtCalcArea.setText(currentText + "/");
+            break;
             case R.id.btnMultiply:
-                if (currentText.isEmpty() || lastCharMatches(currentText, '*')) {
+                if (lastCharMatches(currentText, '*')) {
                     break;
                 }
                 txtCalcArea.setText(currentText + "*");
                 break;
             case R.id.btnAdd:
-                if (currentText.isEmpty() || lastCharMatches(currentText, '+')) {
+                if (lastCharMatches(currentText, '+')) {
                     break;
                 }
                 txtCalcArea.setText(currentText + "+");
@@ -118,8 +117,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean textContains(String text, char matchChar) {
+        if (text.isEmpty() || matchChar == ' ') {
+            return false;
+        }
+        return text.contains(Character.toString(matchChar));
+    }
+
     private boolean lastCharMatches(String text, char matchChar) {
-        if(text.isEmpty() || matchChar == ' '){
+        if (text.isEmpty() || matchChar == ' ') {
             return false;
         }
         return text.charAt(text.length() - 1) == matchChar;
