@@ -3,10 +3,7 @@ package com.example.jetpackcalcapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -21,71 +18,74 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetPackCalcApp()
-        }
-    }
-}
-
-@Composable
-fun JetPackCalcApp() {
-    JetpackCalcAppTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            Column {
-                TxtCalcArea()
-                ColButtonArea()
+            JetpackCalcAppTheme {
+                CalcApp()
             }
         }
     }
 }
 
 @Composable
-fun TxtCalcArea() {
-    Text(text = "txtCalcArea")
+private fun CalcApp() {
+    // A surface container using the 'background' color from the theme
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        Column {
+            TxtCalcArea(Modifier.weight(2f))
+            ColButtonArea()
+        }
+    }
 }
 
 @Composable
-fun ColButtonArea() {
-    Row {
+private fun TxtCalcArea(padding: Modifier) {
+    Text(text = "txtCalcArea", modifier = Modifier.padding())
+}
+
+@Composable
+private fun ColButtonArea() {
+    var rowMods = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+    var buttonMods = Modifier.padding(horizontal = 4.dp)
+    Row(modifier = rowMods) {
         for (label in listOf("AC", "( )", "%", "/")) {
-            ButtonBasic(label)
+            ButtonBasic(label, buttonMods)
         }
     }
-    Row {
+    Row(modifier = rowMods) {
         for (label in listOf("7", "8", "9", "x")) {
-            ButtonBasic(label)
+            ButtonBasic(label, buttonMods)
         }
     }
-
-    Row {
+    Row(modifier = rowMods) {
         for (label in listOf("4", "5", "6", "-")) {
-            ButtonBasic(label)
+            ButtonBasic(label, buttonMods)
         }
     }
-    Row {
+    Row(modifier = rowMods) {
         for (label in listOf("1", "2", "3", "+")) {
-            ButtonBasic(label)
+            ButtonBasic(label, buttonMods)
         }
     }
-    Row {
+    Row(modifier = rowMods) {
         for (label in listOf("0", ".", "xx", "=")) {
-            ButtonBasic(label)
+            ButtonBasic(label, buttonMods)
         }
     }
 }
 
 @Composable
-fun ButtonBasic(value: String) {
-    Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp)) {
+private fun ButtonBasic(value: String, buttonMods: Modifier) {
+    Button(onClick = { /*TODO*/ }, modifier = buttonMods) {
         Text(value)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    JetPackCalcApp()
+private fun DefaultPreview() {
+    JetpackCalcAppTheme {
+        CalcApp()
+    }
 }
