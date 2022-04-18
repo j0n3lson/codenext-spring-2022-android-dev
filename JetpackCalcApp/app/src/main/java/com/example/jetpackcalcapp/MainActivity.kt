@@ -34,7 +34,7 @@ fun JetPackCalcApp() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            Column() {
+            Column {
                 TxtCalcArea()
                 ColButtonArea()
             }
@@ -49,36 +49,31 @@ fun TxtCalcArea() {
 
 @Composable
 fun ColButtonArea() {
-    Row() {
-        ButtonBasic("AC")
-        ButtonBasic("( )")
-        ButtonBasic("%")
-        ButtonBasic("/")
+    Row {
+        for (label in listOf("AC", "( )", "%", "/")) {
+            ButtonBasic(label)
+        }
     }
-    Row() {
-        ButtonBasic("7")
-        ButtonBasic("8")
-        ButtonBasic("9")
-        ButtonBasic("x")
+    Row {
+        for (label in listOf("7", "8", "9", "x")) {
+            ButtonBasic(label)
+        }
     }
 
-    Row() {
-        ButtonBasic("4")
-        ButtonBasic("5")
-        ButtonBasic("6")
-        ButtonBasic("-")
+    Row {
+        for (label in listOf("4", "5", "6", "-")) {
+            ButtonBasic(label)
+        }
     }
-    Row() {
-        ButtonBasic("1")
-        ButtonBasic("2")
-        ButtonBasic("3")
-        ButtonBasic("+")
+    Row {
+        for (label in listOf("1", "2", "3", "+")) {
+            ButtonBasic(label)
+        }
     }
-    Row() {
-        ButtonBasic("0")
-        ButtonBasic(".")
-        ButtonBasic("xx")
-        ButtonBasic("=")
+    Row {
+        for (label in listOf("0", ".", "xx", "=")) {
+            ButtonBasic(label)
+        }
     }
 }
 
